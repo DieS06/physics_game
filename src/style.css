@@ -1,0 +1,144 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    overflow: hidden;
+}
+.webGL
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+#ui {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    top: 0.3rem;
+    padding: 10px;
+}
+button {
+    background-color: #3c758b;
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 3px;
+} button:hover {
+    background-color: white;
+    color: #3c758b;
+    border: 1px solid #3c758b;
+}
+
+.valuesSegment{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.valuesSegment label{
+    width: 100%;
+    text-align: center;
+    color: #3c758b;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+.valuesSegment input {
+    width: 20%;
+    text-align: center;
+    background: #3c758b;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.2rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    margin-right: 0.5rem;
+}
+.valuesSegment-container{
+    width: 100%;
+    text-align: center;
+}
+.valuesSegment-container .feedback{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+/* .sideMenu {
+    background-color: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 100%;
+    color: white;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+    padding-right: 0.5rem;
+}
+
+.sideMenu .header-btn {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.sideMenu .content-sideMenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sideMenu .content-sideMenu label{
+    margin-bottom: 0.3rem;
+    margin-top: 0.3rem; 
+}
+
+.sideMenu .content-sideMenu button{
+    margin-bottom: 0.3rem;
+    margin-top: 0.3rem;
+} */
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    padding: 10px;
+}
+#data {
+    bottom: 0;
+    font-size: 14px;
+    color: white;
+    
+    position: absolute;
+    top: 0.3rem;
+    padding: 10px;
+}

@@ -1,44 +1,29 @@
 import * as THREE from 'three';
-import { Timer } from 'three/addons/misc/Timer.js';
 
-export class Engine{
-    constructor(container){
+export class Engine {
+    constructor(container) {
         this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0x87CEEB);
 
         this.camera = new THREE.PerspectiveCamera(
-            50,
-            window.innerWidth / window.innerHeight,
-            0.1,
-            100
-        );
+            75, 
+            window.innerWidth / window.innerHeight, 
+            0.1, 1000);
         
-        this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize(
-            window.innerWidth,
-            window.innerHeight
-        );
-        renderer.setPixelRatio(
-            Math.min(window.devicePixelRatio, 2)
-        );
+        this.renderer = new THREE.WebGLRenderer({canvas: container});
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        
+        //this.grid = new THREE.GridHelper(20, 20);
 
-        container.appendChild(
-            this.renderer.domElement
-        );
+        this.clock = new THREE.Clock();
 
-        this.timer = new Timer();
+        this.scene.add(this.camera);
     }
 
-    update(){
-        requestAnimationFrame(() => this.update());
-        
-        this.camera.updateProjectionMatrix();
-
-        this.renderer.render(this.scene, this.camera);
-
-        this.timer.update();
-    }
-
-    addObject(object){
+    addObject(object) {
         this.scene.add(object);
     }
 }
+
+export default Engine;
