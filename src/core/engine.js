@@ -14,11 +14,11 @@ export class Engine {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         
-        //this.grid = new THREE.GridHelper(20, 20);
+        this.grid = new THREE.GridHelper(20, 20);
 
         this.clock = new THREE.Clock();
 
-        this.scene.add(this.camera);
+        this.scene.add(this.grid, this.camera);
     }
 
     addObject(object) {

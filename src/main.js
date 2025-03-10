@@ -12,8 +12,9 @@ const game = new Engine(canvas);
 const scene = game.scene;
 //CAMERA
 const camera = game.camera;
-camera.position.set(-0.1, 2.2, 18.5);
+camera.position.set(23, 12, 25);//(23, 12, 25)
 camera.setFocalLength(60);
+
 //RENDERING
 const renderer = game.renderer;
 const size = new Resize(window.innerWidth, window.innerHeight, camera, renderer);
@@ -25,21 +26,28 @@ controls.enableDamping = true;
 //LIGHTS
 const ambientLight = new THREE.AmbientLight(0xffffff, 2.4)
 scene.add(ambientLight)
-//DART GEOMETRY
-const dart = new Projectile(scene);
-dart.loadModel('./models/Darts-GLTF/Darts_glTF.gltf').then(() => {
+//BALL GEOMETRY
+const ball = new Projectile(scene);
+ball.loadModel('./models/Ball-GLTF/Ball.gltf').then(() => {
+    ball.model.scale.set(0.2, 0.2, 0.2);
+    ball.setColor("red");
+    camera.lookAt(ball.model.position);
     document.getElementById('shoot-btn').addEventListener('click', () => {
-        dart.shoot(clock);
+        ball.shoot(clock);
     });
 
     animate();
 }).catch(error => {
     console.error('Error loading:', error);
 });
+
+
+
 //FLOOR AND SKY
 const basicScene = new Basic_Scene();
-const floor = basicScene.addFloor(21, 21, 40, 40);
-const sky = basicScene.load_Sky(100, 10, 3, 0.1, 0.95, 0.3, -0.038, -0.95);
+const floor = basicScene.addFloor(40, 40, 40, 40);
+floor.position.set(0, -0.19, 0);
+const sky = basicScene.load_Sky(20000, 10, 3, 0.1, 0.95, 0.3, -0.038, -0.95);
 if(floor && sky){
     basicScene.load_TX('./textures/alpha.webp').then((texture) => {
         floor.material.alphaMap = texture;
@@ -63,11 +71,12 @@ document.addEventListener("keyup", (event) => {
 // INIT ANIMATION FUNCTION
 const animate = () => 
 {
-    if (dart.model && dart.getInMovement()) {
-        dart.update(clock);
+    if (ball.model && ball.getInMovement()) {
+        ball.update(clock);
     }
     //Update Controls
     controls.update();
+    
     utility.wasdMovementCamera(0.6, pressedKeys, camera);
     //Render
     renderer.render(scene, camera);

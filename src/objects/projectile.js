@@ -29,10 +29,7 @@ export class Projectile{
 
     //SHOOT PROYECTILE METHOD
     shoot(clock){
-        if (!this.model) {
-            console.error('Model not loaded');
-            return;
-        }
+        if (!this.model) {return;}
         if (!clock) return;
         
         let angle = parseFloat(document.getElementById('angle').value);
@@ -58,7 +55,6 @@ export class Projectile{
         if (!this.model || !this.inMovement) return;
 
         const elapsedTime = clock.getElapsedTime() - this.startTime;
-        
         // Ecuaciones de posición
         let positionZ = this.velocityZ * elapsedTime;
         let positionY = this.velocityY * elapsedTime + 0.5 * this.gravity * Math.pow(elapsedTime, 2);
@@ -66,18 +62,17 @@ export class Projectile{
         if (positionY <= 0) {
             positionY = 0;
             this.inMovement = false;
-            console.log(`Impacto: Velocidad final en Y = ${(this.velocityY + this.gravity * elapsedTime).toFixed(2)} m/s`);
         }
 
         this.model.position.set(0, positionY, positionZ);
-        this.updateData(elapsedTime, 0, positionY, positionZ, 0, this.velocityY + this.gravity * elapsedTime);
+        this.updateData(elapsedTime, 0, positionY, positionZ, this.velocityY , this.velocityZ);
     }
 
     updateData(time, positionX, positionY, positionZ, initialVelocityX, finalVelocityY){
         document.getElementById('data').innerHTML = `
         Tiempo: ${time.toFixed(2)} s | 
         Posición: ${positionX.toFixed(2)} en X, ${positionY.toFixed(2)} en Y, ${positionZ.toFixed(2)} en Z | 
-        Velocidad: ${initialVelocityX.toFixed(2)} m/s en X, ${finalVelocityY.toFixed(2)} m/s en Y`;
+        Velocidad Final: ${initialVelocityX.toFixed(2)} m/s en Y, ${finalVelocityY.toFixed(2)} m/s en Z`;
     }
 
     resetErrorMessages(){	
@@ -103,6 +98,17 @@ export class Projectile{
         }
     }
 
+    setColor(color) {
+        if (!this.model) {return;}
+        // Recorre todos los hijos (meshes) del modelo cargado
+        this.model.traverse((child) => {
+            if (child.isMesh) {
+                child.material = new THREE.MeshStandardMaterial({ color });
+                child.material.needsUpdate = true;
+            }
+        });
+    }
+    
     getModel() {
         return this.model;
     }
